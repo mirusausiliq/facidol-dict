@@ -1,0 +1,22 @@
+{
+  "term": "cecay",
+  "properties": {
+    "id": 1,
+    "pos": "num.",
+    "IPA": "t\u0361set\u0361saj",
+    "level": "A1"
+  },
+  "definition": [
+    {
+      "id": 1,
+      "translation": {
+        "ami": "Ira ko cecay foting",
+        "eng": "There is a fish.",
+        "chn-tw": "這裡有一條魚"
+      },
+      "info": "cecay [nou.]"
+    }
+  ],
+  "usage_info": "...",
+  "related_words": "..."
+}

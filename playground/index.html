@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Query</title>
+  </head>
+
+  <body>
+    <h1>JSON Query with Autocomplete</h1>
+    <label for="wordInput">Enter a word:</label>
+    <input type="text" id="wordInput" placeholder="Enter a word..." />
+    <br />
+    <button onclick="queryJSON()">Query</button>
+    <div id="result"></div>
+
+    <ul id="autocomplete-list"></ul>
+
+    <script>
+      // Replace "your_json_file_path" with the actual path of your JSON file.
+      const your_json_file_path = "sortedstem.json";
+
+      let jsonData = null;
+      fetch(your_json_file_path)
+        .then((response) => response.json())
+        .then((data) => (jsonData = data))
+        .catch((error) => {
+          console.error("Error loading JSON data:", error);
+        });
+
+      function queryJSON() {
+        const inputWord = document.getElementById("wordInput").value;
+        const resultElement = document.getElementById("result");
+
+        if (jsonData[inputWord] !== undefined) {
+          resultElement.textContent = jsonData[inputWord];
+        } else {
+          resultElement.textContent = "Result not found.";
+        }
+      }
+
+      const inputField = document.getElementById("wordInput");
+      const autocompleteList = document.getElementById("autocomplete-list");
+
+      inputField.addEventListener("input", function () {
+        const inputText = this.value.trim().toLowerCase();
+        const matchingWords = Object.keys(jsonData).filter((word) =>
+          word.startsWith(inputText)
+        );
+
+        if (inputText === "") {
+          autocompleteList.innerHTML = "";
+        } else {
+          const autocompleteItems = matchingWords
+            .map((word) => `<li>${word}</li>`)
+            .join("");
+          autocompleteList.innerHTML = autocompleteItems;
+        }
+      });
+
+      autocompleteList.addEventListener("click", function (event) {
+        const selectedWord = event.target.textContent;
+        inputField.value = selectedWord;
+        autocompleteList.innerHTML = "";
+      });
+    </script>
+  </body>
+</html>

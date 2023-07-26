@@ -1,0 +1,31 @@
+{
+  "term": "",
+  "stem": "",
+  "properties": {
+    "id": "",
+    "tags": {},
+    "basic": {
+      "pos": "",
+      "ipa": ""
+    },
+    "level": {
+      "cefr": "",
+      "ilrdf": ""
+    },
+    "other": {
+      "author": "", 
+      "time": "",
+      "location": "",
+      "device": "",
+      "license": "",
+      "reference": ""
+    }
+  },
+  "definitions": [
+    {
+      
+    }
+  ],
+  "declension": {},
+  "conjugation": {}
+}

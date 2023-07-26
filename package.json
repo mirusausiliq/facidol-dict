@@ -1,0 +1,9 @@
+{
+  "name": "formosan-dict",
+  "version": "1.0.0",
+  "description": "Just a Project for Building Online Formosan Language Dictionary. ",
+  "main": "index.js",
+  "repositoru": "",
+  "author": "mirusausiliq",
+  "license": "MIT"
+}
