@@ -4,11 +4,21 @@
 }
 
 body {
+  font-size: 18px;
   font-family: 'FakePearl-Regular', Times, serif;
+}
+
+.navbar-container {
+  padding-left: 53px;
+  padding-right: 53px;
 }
 
 .nav-item {
   align-content: center;
   text-align:center; 
   font-size: 1.25em;
+}
+
+.backdrop-filter {
+  backdrop-filter: blur(10px);
 }

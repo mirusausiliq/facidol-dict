@@ -7,10 +7,14 @@
       content="width=device-width, initial-scale=1, minimum-scale=1"
     />
     <title id="head-title">Facidol Dictionary</title>
-    <link href="./assets/image/favicon.ico" rel="icon" />
+    <link href="../../assets/image/favicon.ico" rel="icon" />
 
     <!-- og -->
-    <meta property="og:image" content="./assets/image/herta01.gif" />
+    <meta property="og:url" content="https://mirusausiliq.com/facidol-dict" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Facidol Dictionary" />
+    <meta property="og:description" content="Online Formosan Language Dictionary" />
+    <meta property="og:image" content="https://i.imgur.com/wRJhwP0.gif" />
     <meta property="og:image:width" content="auto" />
     <meta property="og:image:height" content="auto" />
     <meta
@@ -20,13 +24,13 @@
     <meta name="description" content="Online Formosan Language Dictionary" />
 
     <!-- Bootstrap 5 -->
-    <link
+    <!--<link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
-    />
-    <!--<link href="../src/assets/css/bootstrap.css" rel="stylesheet">--> 
+    />-->
+    <link href="../../assets/css/bootstrap.css" rel="stylesheet">
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
@@ -41,7 +45,8 @@
 
     <!-- Local -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
-    <script src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/changeLanguage.js"></script>
+    <script src="../../assets/js/changeTheme.js"></script>
   </head>
 
   <style>
@@ -104,10 +109,9 @@
     <!-- navbar -->
 
     <nav
-      class="navbar navbar-expand-sm fixed-top"
-      style="backdrop-filter: blur(10px)"
+      class="navbar navbar-expand-md fixed-top backdrop-filter"
     >
-      <div class="container-fluid">
+      <div class="container-fluid navbar-container">
         <div class="nav-item">
           <a type="button" href="../../index.html" class="btn nav-link"
             ><i class="fa-solid fa-fire"></i> Facidol
@@ -134,6 +138,7 @@
               <a
                 href="./ipa.html"
                 class="nav-link"
+                id="nav-item-ipa"
                 >IPA</a
               >
             </li>
@@ -141,8 +146,29 @@
               <a
                 href="./stem.html"
                 class="nav-link"
+                id="nav-item-stem"
                 >Stem</a
               >
+            </li>
+            <li class="nav-item">
+              <a href="../about.html" class="nav-link" id="nav-item-about">
+                About
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="https://github.com/mirusausiliq/facidol-dict" class="nav-link" target="_blank">
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="https://discord.gg/wSECrwgqhV" class="nav-link" target="_blank">
+                <i class="fa-brands fa-discord"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="https://bmc.link/mirusausilq" class="nav-link" target="_blank">
+                <i class="fa-solid fa-mug-hot"></i>
+              </a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link" onclick="changeTheme()">
@@ -154,21 +180,6 @@
                 <i class="fa-solid fa-language"></i>
               </a>
             </li>
-
-            <script>
-              function changeTheme() {
-                const html = document.getElementById("html");
-                const theme_icon = document.getElementById("theme_icon");
-                const theme = html.getAttribute("data-bs-theme");
-
-                html.setAttribute(
-                  "data-bs-theme",
-                  theme === "dark" ? "light" : "dark"
-                );
-                theme_icon.classList.toggle("fa-sun", theme !== "dark");
-                theme_icon.classList.toggle("fa-moon", theme === "dark");
-              }
-            </script>
           </ul>
         </div>
       </div>
@@ -181,8 +192,8 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">
+        <div class="col-2"></div>
+        <div class="col-sm-8">
           <h1>* Amis IPA Generator ✩‧₊˚</h1>
 
           <div class="input-group mb-3">
@@ -261,130 +272,19 @@
 
           <h3>✧*｡ ʕ•ᴥ•ʔ Thanks For Visiting! ✧*｡</h3>
         </div>
-        <div class="col-sm-3"></div>
+        <div class="col-2"></div>
       </div>
     </div>
 
     <!-- footer -->
-    <div class="container"></div>
-
-    <script>
-      var languages = {
-        eng: {
-          "head_title": "Facidol Dictionary",
-          "nav-item-about": "About",
-          "nav-item-learn": "Learn",
-          "nav-item-dictionary": "Dictionary",
-          "nav-item-resources": "Resources",
-          "nav-item-vocabulary": "Vocabulary",
-          "nav-item-grammar": "Grammar",
-          "nav-item-tools": "Tools",
-          "btn-query": "Query"
-        },
-        chn: {
-          "head_title": "巴基魯族語詞典",
-          "nav-item-about": "關於",
-          "nav-item-learn": "學習",
-          "nav-item-dictionary": "辭典",
-          "nav-item-resources": "資源",
-          "nav-item-vocabulary": "詞彙",
-          "nav-item-grammar": "語法",
-          "nav-item-tools": "工具",
-          "btn-query": "搜尋"
-        },
-        jpn: {
-          "head_title": "ファジル辞書",
-          "nav-item-about": "關於",
-          "nav-item-learn": "勉強",
-          "nav-item-dictionary": "辞書",
-          "nav-item-resources": "リソース",
-          "nav-item-vocabulary": "ボキャブラリー",
-          "nav-item-grammar": "文法",
-          "nav-item-tools": "道具",
-          "btn-query": "検索"
-
-        },
-        ami: {
-          // Amis
-          "head_title": "O Citing no Facidol",
-          "nav-item-about": "About",
-          "nav-item-learn": "Micodad",
-          "nav-item-dictionary": "Citing",
-          "nav-item-resources": "Resources",
-          "nav-item-vocabulary": "Vocabulary",
-          "nav-item-grammar": "Grammar",
-          "nav-item-tools": "Kaysing",
-          "btn-query": "Misearch"
-        } /*,
-        tay: {},
-        bnn: {},
-        xnb: {},
-        ckv: {},
-        pwn: {},
-        pyu: {},
-        dru: {},
-        sxr: {},
-        xsy: {},
-        trv: {},
-        ssf: {},
-        tsu: {},
-        tao: {},
-        byq: {},
-        bzg: {},
-        uon: {},
-        pzh: {},
-        kae: {},
-        ppu: {},
-        fos: {},
-        tvx: {},*/,
-      };
-
-      // Function to update the text content based on the selected language
-      function updateTextContent(language) {
-        var languageData = languages[language];
-
-        const headTitleElement = document.getElementById("head_title");
-        const navItemLearnElement = document.getElementById("nav-item-learn");
-        const navItemDictionaryElement = document.getElementById(
-          "nav-item-dictionary"
-        );
-        const navItemResourcesElement =
-          document.getElementById("nav-item-resources");
-        const navItemVocabularyElement = document.getElementById(
-          "nav-item-vocabulary"
-        );
-        const navItemGrammarElement =
-          document.getElementById("nav-item-grammar");
-        const btnQuery = document.getElementById("btn-query");
-
-        // Check if the elements exist before setting their innerHTML
-        if (headTitleElement)
-          headTitleElement.innerHTML = languageData["head_title"];
-        if (navItemLearnElement)
-          navItemLearnElement.innerHTML = languageData["nav-item-learn"];
-        if (navItemDictionaryElement)
-          navItemDictionaryElement.innerHTML = languageData["nav-item-dictionary"];
-        if (btnQuery)
-          btnQuery.innerHTML = languageData["btn-query"];
-      }
-
-      var defaultValue = 0;
-      var languageList = ["eng", "chn", "jpn", "ami"];
-
-      function changeLanguage() {
-        defaultValue++;
-        if (defaultValue < 4) {
-          const selectedLanguage = languageList[defaultValue];
-          updateTextContent(selectedLanguage);
-        } else {
-          // If the defaultValue exceeds the number of available languages, reset to the first language (ENG)
-          defaultValue = 0;
-          updateTextContent("eng");
-        }
-      }
-
-      // Initialize the text content with the default language (ENG)
-      updateTextContent("eng");
-    </script>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-sm-8">
+          <p>© 2023 Mirusa Usiliq & Facidol Dictionary. All rights reserved</p>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
   </body>
 </html>
