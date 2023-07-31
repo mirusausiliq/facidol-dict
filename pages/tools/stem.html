@@ -44,68 +44,18 @@
     ></script>
 
     <!-- Local -->
-    <link href="../../assets/css/style.css" rel="stylesheet" />
     <link href="../../assets/css/bootstrap.css" rel="stylesheet">
     <script src="../../assets/js/changeLanguage.js"></script>
     <script src="../../assets/js/changeTheme.js"></script>
   </head>
 
+  <!-- Local CSS -->
+  <link rel="stylesheet" type="text/css" href="../../assets/css/style.css" />
+
   <style>
-    @font-face {
-      font-family: FakePearl-Regular;
-      src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff2)
-          format("woff2"),
-        url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff)
-          format("woff");
-    }
-
-    body {
-      font-size: 18px;
-      font-family: "FakePearl-Regular", Times, serif;
-      margin: 40px;
-    }
-
-    .fa-moon {
-      padding-left: 2.5px;
-      padding-right: 2.5px;
-    }
-
-    .navbar-container {
-      padding-left: 53px;
-      padding-right: 53px;
-    }
-
-    .nav-item {
-      align-content: center;
-      text-align:center; 
-      font-size: 1.25em;
-    }
-
-    .backdrop-filter {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
     #result {
       font-weight: bold;
     }
-
-    /*
-    #autocomplete-list {
-      list-style: none;
-      padding: 0;
-      max-height: 200px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      position: absolute;
-      background-color: rgb(255, 255, 255);
-      width: 200px;
-    }
-    #autocomplete-list li {
-      padding: 5px;
-      cursor: pointer;
-    }*/
 
     #autocomplete-list {
       max-height: 200px;
@@ -124,8 +74,8 @@
   </style>
 
   <body>
+    
     <!-- navbar -->
-
     <nav
       class="navbar navbar-expand-md fixed-top backdrop-filter"
     >
@@ -211,7 +161,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-2"></div>
-        <div class="col-sm-8">
+        <div class="col-md-8">
           <h1>* Amis Stem Finder ✩‧₊˚</h1>
 
           <div class="input-group mb-3">
@@ -298,7 +248,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-2"></div>
-        <div class="col-sm-8">
+        <div class="col-md-8">
           <p>© 2023 Mirusa Usiliq & Facidol Dictionary. All rights reserved</p>
         </div>
         <div class="col-2"></div>

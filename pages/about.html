@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" id="html" data-bs-theme="dark">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1"
     />
-    <title id="head-title">Facidol Dictionary</title>
+    <title id="title">Facidol Dictionary</title>
     <link href="../assets/image/favicon.ico" rel="icon" />
 
     <!-- og -->
@@ -46,53 +46,32 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- 核心：Tocas UI -->
+    <!--
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.4/tocas.min.css"
+    />-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/tocas.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.4/tocas.min.js"></script>
+
     <!-- Local -->
-    <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/bootstrap.css" rel="stylesheet" />
-    <script src="../assets/js/changeLanguage.js"></script>
-    <script src="../assets/js/changeTheme.js"></script>
+    <!--<script src="../assets/js/changeLanguage.js"></script>
+    <script src="../assets/js/changeTheme.js"></script>-->
   </head>
 
-  <style>
-    @font-face {
-      font-family: FakePearl-Regular;
-      src: url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff2)
-          format("woff2"),
-        url(https://cdn.jsdelivr.net/gh/max32002/FakePearl@1.1/webfont/FakePearl-Regular.woff)
-          format("woff");
-    }
+  <!-- Local CSS -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
 
-    body {
-      font-size: 18px;
-      font-family: "FakePearl-Regular", Times, serif;
-      margin: 40px;
-    }
-
-    .fa-moon {
-      padding-left: 2.5px;
-      padding-right: 2.5px;
-    }
-
-    .navbar-container {
-      padding-left: 53px;
-      padding-right: 53px;
-    }
-
-    .nav-item {
-      align-content: center;
-      text-align: center;
-      font-size: 1.25em;
-    }
-
-    .backdrop-filter {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-  </style>
+  <script
+    src="https://code.jquery.com/jquery-3.7.0.slim.js"
+    integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c="
+    crossorigin="anonymous"
+  ></script>
 
   <body>
     <!-- navbar -->
-
     <nav class="navbar navbar-expand-md fixed-top backdrop-filter">
       <div class="container-fluid navbar-container">
         <div class="nav-item">
@@ -118,19 +97,12 @@
         >
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a href="./tools/ipa.html" class="nav-link" id="nav-item-ipa"
-                >IPA</a
+              <a href="./amidict.html" class="nav-link" id="articles"
+                >Amid Dictionary</a
               >
             </li>
             <li class="nav-item">
-              <a href="./tools/stem.html" class="nav-link" id="nav-item-stem"
-                >Stem</a
-              >
-            </li>
-            <li class="nav-item">
-              <a href="./about.html" class="nav-link" id="nav-item-about">
-                About
-              </a>
+              <a href="./about.html" class="nav-link" id="about"> About </a>
             </li>
             <li class="nav-item">
               <a
@@ -163,11 +135,7 @@
               <a href="#" class="nav-link" onclick="changeTheme()">
                 <i class="fa-solid fa-moon" id="theme_icon"></i>
               </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" onclick="changeLanguage()">
-                <i class="fa-solid fa-language"></i>
-              </a>
+              <script src="../assets/js/changeTheme.js"></script>
             </li>
           </ul>
         </div>
@@ -176,14 +144,136 @@
 
     <!-- main -->
     <div class="container-fluid">
-      <div clas="row" style="padding-top: 64px"></div>
+      <div clas="row" style="padding-top: 65.75px"></div>
     </div>
 
     <div class="container-fluid">
       <div class="row">
         <div class="col-2"></div>
-        <div class="col-sm-8">
-          <h1>* About Us ✩‧₊˚</h1>
+        <div class="col-md-8">
+          <h1>About Us - Test</h1>
+          <br />
+
+          <h2>## 01 Heading</h2>
+          <div class="ts-divider is-section"></div>
+          <h1>Heading 01</h1>
+          <h2>Heading 02</h2>
+          <h3>Heading 03</h3>
+          <h4>Heading 04</h4>
+          <h5>Heading 05</h5>
+          <br />
+
+          <h2>## 02 Text</h2>
+          <div class="ts-divider is-section"></div>
+          <p>paragraph</p>
+          <span>Span Text</span>
+          <article>Article Text</article><br />
+          <ruby>可愛<rt>かわい</rt>がる</ruby><br />
+          <b>Bold Text</b><br />
+          <i>Italic Text</i><br />
+          <strong>Important Text</strong><br />
+          <em>Emphasized Text</em><br />
+          <mark>Marked Text</mark><br />
+          <small>Smaller Text</small><br />
+          <del>Deleted Text</del><br />
+          <ins>Inserted Text</ins><br />
+          <sub>Subscript Text</sub><br />
+          <sup>Supscript Text</sup><br />
+
+          <div class="ts-divider is-section"></div>
+
+          <div class="ts-list is-unordered">
+            <div class="item">橙希</div>
+            <div class="item">卡莉絲</div>
+            <div class="item">羽田白音</div>
+          </div>
+
+          <p class="magic">
+            Lorem ipsum dolor sit amet. Non sapiente saepe in aliquam porro aut
+            sunt error et dolorem mollitia et quod necessitatibus. Qui
+            dignissimos quia cum quasi molestias quo debitis fugit et Quis
+            quisquam ut atque aliquid ut repudiandae aliquam et provident sint.
+            Sed nobis exercitationem sed nihil dolore est atque exercitationem
+            et magni placeat rem officia omnis. Hic doloribus quas est facilis
+            dolores et officiis odit qui nihil ipsa et unde accusamus est earum
+            ipsa. Ut Quis quia non dignissimos porro et incidunt inventore eos
+            incidunt laudantium. Quo Quis distinctio sed voluptate voluptate et
+            officia vitae et omnis nobis qui quidem quae. Eos quis reiciendis et
+            doloremque assumenda id iusto repellendus nam blanditiis rerum vel
+            minima soluta sit quidem dolor. In officia numquam et velit
+            reiciendis rem voluptas eaque ab repudiandae sunt? A incidunt
+            excepturi ea suscipit praesentium sed necessitatibus autem qui quod
+            dolor. Qui provident optio eum similique doloremque eum galisum
+            optio est illo beatae eos doloremque obcaecati ut natus minus. Ut
+            minus magni ut sunt consectetur qui omnis distinctio in doloremque
+            eius in fugiat rerum.
+          </p>
+
+          <button type="button" class="btn btn-info" id="playAudio">
+            Kurukuru~
+          </button>
+
+          <!-- Make sure to replace "path/to/audio/file.mp3" with the actual path to your audio file -->
+          <audio id="audioPlayer">
+            <source src="../assets/audio/ja/kuru1.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <script src="../assets/js/playAudio.js"></script>
+
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-md-8">
+          <div>
+            <br />
+          </div>
+          <button class="btn btn-danger" data-dropdown="dropdown">
+            <span class="fa-solid fa-language"></span>
+            <span id="language">Language</span>
+          </button>
+          <div
+            class="ts-dropdown"
+            data-name="dropdown"
+            style="max-height: 200px; overflow-y: scroll"
+          >
+            <button id="eng" class="item">English</button>
+            <button id="chn" class="item">Chinese</button>
+            <button id="jpn" class="item">Japanese</button>
+            <button id="kor" class="item">Korean</button>
+            <button id="por" class="item">Portuguese</button>
+            <button id="spa" class="item">Spanish</button>
+            <button id="fre" class="item">French</button>
+            <button id="ger" class="item">German</button>
+            <button id="ami" class="item">Amis</button>
+
+            <script
+              type="text/javascript"
+              src="../assets/js/changeLanguage.js"
+            ></script>
+          </div>
+
+          <div>
+            <br />
+          </div>
+
+          <p>
+            © 2023 Mirusa Usiliq & Facidol Dictionary. All rights reserved
+          </p>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- 
+            <h1>* About Us ✩‧₊˚</h1>
           <img
             src="../assets/image/herta01.gif"
             width="200px"
@@ -191,7 +281,6 @@
             class="center"
             style="border-radius: 10px"
           />
-          <br />
           <br />
 
           <h3>Developer</h3>
@@ -222,70 +311,6 @@
             minus magni ut sunt consectetur qui omnis distinctio in doloremque
             eius in fugiat rerum.
           </p>
-          <br />
-          <p>
-            Cum quae voluptatem est porro doloribus qui dolores nobis et quis
-            illum et exercitationem nihil non architecto quia ut numquam
-            ratione. Et dolor laudantium et ipsam quia id tenetur recusandae est
-            illum galisum quo rerum voluptas cum alias dicta. Aut fugit
-            reiciendis ut exercitationem nihil qui atque consequuntur. Nam
-            adipisci mollitia eos quos enim sed debitis suscipit a soluta rerum
-            et sint totam. Ex exercitationem fugiat et aspernatur dolorem non
-            ipsum quia quo ullam sint est asperiores sequi. At labore blanditiis
-            vel quis quaerat non explicabo omnis non ullam suscipit. A dolorem
-            natus et quis quibusdam et quae tempora id quibusdam nulla et unde
-            laborum quo quia ducimus. Qui molestiae doloribus sed quasi omnis et
-            tenetur eius et suscipit sint ut accusantium ullam qui atque sequi
-            aut voluptatem itaque. Ad unde ullam rem adipisci architecto sed
-            nesciunt obcaecati aut dolor ratione sed omnis ratione sit molestias
-            natus aut aperiam tenetur. In veniam accusantium ex nobis voluptatum
-            id maiores laudantium qui iste dolorem nam sunt consequatur sit
-            maxime molestias. Non internos beatae et quasi voluptatibus eum
-            autem iste id consequatur ipsa et voluptatem doloremque! Qui saepe
-            voluptas et veritatis earum qui amet reiciendis eum recusandae
-            voluptatibus id sint cumque ea amet ipsum ut sunt enim. Nam modi
-            voluptatem ut facere rerum ut galisum error. Non architecto
-            recusandae et nisi voluptas quo tempore quae!
-          </p>
-          <p>
-            Eum esse voluptates sed facilis perferendis non ducimus quasi in
-            dolor numquam! Eos quos nisi At blanditiis ipsum ut impedit pariatur
-            quo consequatur assumenda sed corrupti magnam ea porro magni. Ad
-            incidunt reiciendis et iste voluptates cum optio omnis sed galisum
-            itaque qui asperiores similique est tempore inventore. Nam internos
-            maxime rem nesciunt voluptatum eos iusto incidunt id modi omnis. Est
-            provident omnis et consectetur minima sit architecto debitis ut
-            obcaecati consequuntur sit soluta voluptatem. Qui internos officia
-            est sapiente explicabo qui obcaecati illo ea animi dicta et modi
-            eveniet non dolores voluptatum in molestiae commodi. Nam maiores
-            corporis sit enim fugiat non impedit neque qui voluptatum assumenda
-            aut nisi neque. Qui laborum voluptatum et temporibus cumque ad quam
-            excepturi non veritatis tenetur et similique fuga et pariatur
-            voluptas. Et eius nisi aut quidem tempore est facere optio 33 quasi
-            praesentium hic officia deserunt? Est voluptatem recusandae ut
-            pariatur molestias ad maxime aspernatur qui placeat assumenda hic
-            eligendi quidem eum nemo magnam non aliquam quia. Sed sunt nostrum
-            quo autem animi et mollitia corrupti sed perspiciatis voluptate. Et
-            tempora esse et debitis culpa ea obcaecati maiores et libero quod.
-            Aut minus quia est repellendus nemo sit similique illo. Sed dicta
-            facilis et quis repellat ea commodi quasi et aperiam rerum.
-          </p>
 
           <h2>✧*｡ ʕ•ᴥ•ʔ Thanks For Visiting! ✧*｡</h2>
-        </div>
-        <div class="col-2"></div>
-      </div>
-    </div>
-
-    <!-- footer -->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-2"></div>
-        <div class="col-sm-8">
-          <p>© 2023 Mirusa Usiliq & Facidol Dictionary. All rights reserved</p>
-        </div>
-        <div class="col-2"></div>
-      </div>
-    </div>
-  </body>
-</html>
+-->
