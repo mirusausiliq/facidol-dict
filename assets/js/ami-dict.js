@@ -79,7 +79,7 @@ $(document).ready(function () {
   // Function to render the JSON data for a specific title
   const renderJSONByTitle = (jsonData, searchWord) => {
     // Clear the previous content
-    $("#word").empty();
+    $("#raw").empty();
 
     const audioURL = `${originURL}${searchWord}`;
     const audio = new Audio(audioURL);
@@ -237,7 +237,7 @@ $(document).ready(function () {
                 <td>  caay ma-${stem}</td>
                 <td>     caay ${stem}-en</td>
                 <td>caay sapi-${stem}</td>
-                <td> caay pi-${stem}en</td>
+                <td>  caay pi-${stem}en</td>
               </tr>
               <tr>
                 <td>將行體 ipf.</td>
@@ -483,7 +483,7 @@ $(document).ready(function () {
       }
 
       // Append the rendered content to the #raw div
-      $("#word").append(html);
+      $("#raw").append(html);
 
       // Attach the click event to the play button after it is added to the DOM
       $("#playAudio").on("click", () => {
