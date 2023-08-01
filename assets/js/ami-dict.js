@@ -39,13 +39,6 @@ $(document).ready(function () {
   const originURL =
     "https://hts.ithuan.tw/%E6%96%87%E6%9C%AC%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90?%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=Pangcah&%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=";
 
-  let jsonData;
-  $.getJSON(jsonURL, function (data) {
-    jsonData = data;
-  }).fail(function (jqxhr, textStatus, error) {
-    console.error("Error loading JSON data: ", error);
-  });
-
   //
   function generateIPA(word) {
     // Convert the word to lowercase for case-insensitive lookup
@@ -98,7 +91,12 @@ $(document).ready(function () {
                     <div class="ts-divider is-section"></div>
                  `;
 
-      if (title.startsWith("mi") || title.startsWith("ma") || title.startsWith("om", 1) || title.startsWith("tala")) {
+      if (
+        title.startsWith("mi") ||
+        title.startsWith("ma") ||
+        title.startsWith("om", 1) ||
+        title.startsWith("tala")
+      ) {
         html += `<p>詞性 POS: Verb 動詞</p>`;
       } else {
         html += `<p>詞性 POS: Unknown???</p>`;
@@ -505,39 +503,46 @@ $(document).ready(function () {
     }
   };
 
-  // Bind the search button click event
-  $("#search-btn").on("click", handleSearch);
+  let jsonData;
+  $.getJSON(jsonURL, function (data) {
+    jsonData = data;
 
-  // Bind the Enter key press event in the search input field
-  $("#search-input").on("keypress", function (event) {
-    if (event.which === 13) {
-      // If Enter key is pressed, trigger the search button click
-      handleSearch();
-    }
-  });
+    // Bind the search button click event
+    $("#search-btn").on("click", handleSearch);
 
-  // Bind the input event for autocomplete
-  $("#search-input").on("input", function () {
-    const inputText = $(this).val().trim().toLowerCase();
-    const matchingWords = jsonData.filter((entry) =>
-      entry.title.startsWith(inputText)
-    );
+    // Bind the Enter key press event in the search input field
+    $("#search-input").on("keypress", function (event) {
+      if (event.which === 13) {
+        // If Enter key is pressed, trigger the search button click
+        handleSearch();
+      }
+    });
 
-    if (inputText === "") {
+    // Bind the input event for autocomplete
+    $("#search-input").on("input", function () {
+      const inputText = $(this).val().trim().toLowerCase();
+      const matchingWords = jsonData.filter((entry) =>
+        entry.title.startsWith(inputText)
+      );
+
+      if (inputText === "") {
+        $("#autocomplete-list").html("");
+      } else {
+        const autocompleteItems = matchingWords
+          .map((entry) => `<li class="list-group-item">${entry.title}</li>`)
+          .join("");
+        $("#autocomplete-list").html(autocompleteItems);
+      }
+    });
+
+    // Bind the click event for the autocomplete list items
+    $("#autocomplete-list").on("click", "li", function (event) {
+      const selectedWord = $(this).text();
+      $("#search-input").val(selectedWord);
       $("#autocomplete-list").html("");
-    } else {
-      const autocompleteItems = matchingWords
-        .map((entry) => `<li class="list-group-item">${entry.title}</li>`)
-        .join("");
-      $("#autocomplete-list").html(autocompleteItems);
-    }
-  });
-
-  // Bind the click event for the autocomplete list items
-  $("#autocomplete-list").on("click", "li", function (event) {
-    const selectedWord = $(this).text();
-    $("#search-input").val(selectedWord);
-    $("#autocomplete-list").html("");
-    handleSearch();
+      handleSearch();
+    });
+  }).fail(function (jqxhr, textStatus, error) {
+    console.error("Error loading JSON data: ", error);
   });
 });
