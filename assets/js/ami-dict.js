@@ -95,7 +95,9 @@ $(document).ready(function () {
 
       let html = `<div style="display: inline-block;">
                     <h2>${title}</h2>
-                    <audio controls>
+                    <p>${foundEntry.stem ? `Stem: ${foundEntry.stem}` : ''}</p>
+                    <p>IPA: [${generateIPA(title)}]</p>
+                    <audio controls class="embed-responsive-item">
                       <source src="${audioURL}" type="audio/mp3">
                     </audio>
                   </div>
@@ -105,14 +107,9 @@ $(document).ready(function () {
         audio.play();
       });
 
-      if (title) {
-        html += `<p>IPA: [${generateIPA(title)}]</p>`;
-      }
 
-      if (foundEntry.stem) {
-        html += `<p>Stem: ${foundEntry.stem}</p>`;
-      }
 
+      html += `<h3>- Definitions</h3>`;
       heteronyms.forEach((heteronym) => {
         heteronym.definitions.forEach((definition) => {
           const def = definition.def;
@@ -135,12 +132,251 @@ $(document).ready(function () {
           }
 
           if (definition.synonyms) {
+            html += `<h3>Synonyms</h3>`
             definition.synonyms.forEach((synonyms) => {
               html += `<p><i>${synonyms}</i></p>`;
             });
           }
         });
       });
+
+      if (title.startsWith("mi")) {
+        const stem = foundEntry.stem;
+        let firstChar = "";
+        
+        if (stem.charAt(0) == ('a' || 'e' || 'i' || 'o' || 'u')) {
+        } else {
+          firstChar = stem.charAt(0);
+        }
+
+        html += `<h3>- Conjugations<h3>`;
+        html += `
+          <div class="ts-box">
+            <table class="ts-table">
+                <tbody>
+                  <tr>
+                  <td>AFF.</td>
+                  <td>act.</td>
+                  <td>psv.nrm.</td>
+                  <td>psv.cst.</td>
+                  <td>ins.</td>
+                  <td>loc.</td>
+                </tr>
+                <tr>
+                  <td>nrm.</td>
+                  <td>mi-${stem}</td>
+                  <td>ma-${stem}</td>
+                  <td>${stem}-en</td>
+                  <td>sapi-${stem}</td>
+                  <td>pi-${stem}en</td>
+                </tr>
+                <tr>
+                  <td>ipf.</td>
+                  <td>mami-${stem}</td>
+                  <td>mama-${stem}</td>
+                  <td>${firstChar}a-${stem}-en</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>prf.</td>
+                  <td>mi-${stem}-ay</td>
+                  <td>ma-${stem}-ay</td>
+                  <td>mi-${stem}-an</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+        `;
+        html += `
+        <div class="ts-box">
+          <table class="ts-table">
+              <tbody>
+                <tr>
+                <td>NGT.</td>
+                <td>act.</td>
+                <td>psv.nrm.</td>
+                <td>psv.cst.</td>
+                <td>ins.</td>
+                <td>loc.</td>
+              </tr>
+              <tr>
+                <td>nrm.</td>
+                <td>caay mi-${stem}</td>
+                <td>caay ma-${stem}</td>
+                <td>caay ${stem}-en</td>
+                <td>caay sapi-${stem}</td>
+                <td>caay pi-${stem}en</td>
+              </tr>
+              <tr>
+                <td>ipf.</td>
+                <td>caay mami-${stem}</td>
+                <td>caay mama-${stem}</td>
+                <td>${firstChar}a-${stem}-en</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+              <tr>
+                <td>prf.</td>
+                <td>caay mi-${stem}-ay</td>
+                <td>caay ma-${stem}-ay</td>
+                <td>caay mi-${stem}-an</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+      }
+
+      if (title.startsWith("ma")) {
+        const stem = foundEntry.stem;
+        let firstChar = "";
+        
+        if (stem.charAt(0) == ('a' || 'e' || 'i' || 'o' || 'u')) {
+        } else {
+          firstChar = stem.charAt(0);
+        }
+
+        html += `<h3>- Conjugations<h3>`;
+        html += `
+          <div class="ts-box">
+            <table class="ts-table">
+                <tbody>
+                  <tr>
+                  <td>AFF.</td>
+                  <td>act.</td>
+                  <td>psv.nrm.</td>
+                  <td>psv.cst.</td>
+                  <td>ins.</td>
+                  <td>loc.</td>
+                </tr>
+                <tr>
+                  <td>nrm.</td>
+                  <td>ma-${stem}</td>
+                  <td>...</td>
+                  <td>ma-${stem}-en</td>
+                  <td>saka-${stem}</td>
+                  <td>ka-${stem}en</td>
+                </tr>
+                <tr>
+                  <td>ipf.</td>
+                  <td>mama-${stem}</td>
+                  <td>mama-${stem}</td>
+                  <td>mama-${stem}-en</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>prf.</td>
+                  <td>ma-${stem}-ay</td>
+                  <td>ma-${stem}-ay</td>
+                  <td>${stem}-an</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+        `;
+        html += `
+        <div class="ts-box">
+          <table class="ts-table">
+              <tbody>
+                <tr>
+                <td>NGT.</td>
+                <td>act.</td>
+                <td>psv.nrm.</td>
+                <td>psv.cst.</td>
+                <td>ins.</td>
+                <td>loc.</td>
+              </tr>
+              <tr>
+                <td>nrm.</td>
+                <td>caay ma-${stem}</td>
+                <td>...</td>
+                <td>caay ma-${stem}-en</td>
+                <td>caay saka-${stem}</td>
+                <td>caay ka-${stem}en</td>
+              </tr>
+              <tr>
+                <td>ipf.</td>
+                <td>caay mama-${stem}</td>
+                <td>caay mama-${stem}</td>
+                <td>caay mama-${stem}-en</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+              <tr>
+                <td>prf.</td>
+                <td>caay ma-${stem}-ay</td>
+                <td>caay ma-${stem}-ay</td>
+                <td>caay ${stem}-an</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+      }
+
+      if (title.startsWith("om", 1)) {
+        const stem = foundEntry.title;
+        let firstChar = "";
+        
+        if (stem.charAt(0) == ('a' || 'e' || 'i' || 'o' || 'u')) {
+        } else {
+          firstChar = stem.charAt(0);
+        }
+
+        html += `<h3>- Conjugations<h3>`;
+        html += `
+          <div class="ts-box">
+            <table class="ts-table">
+                <tbody>
+                  <tr>
+                  <td>AFF.</td>
+                  <td>act.</td>
+                  <td>psv.nrm.</td>
+                  <td>psv.cst.</td>
+                  <td>ins.</td>
+                  <td>loc.</td>
+                </tr>
+                <tr>
+                  <td>nrm.</td>
+                  <td>${stem}</td>
+                  <td>...</td>
+                  <td>${stem}-en</td>
+                  <td>saka-${stem}</td>
+                  <td>ka-${stem}en</td>
+                </tr>
+                <tr>
+                  <td>ipf.</td>
+                  <td>mama-${stem}</td>
+                  <td>mama-${stem}</td>
+                  <td>mama-${stem}-en</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>prf.</td>
+                  <td>ma-${stem}-ay</td>
+                  <td>ma-${stem}-ay</td>
+                  <td>${stem}-an</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
 
       // Append the rendered content to the #raw div
       $("#raw").append(html);
@@ -149,7 +385,6 @@ $(document).ready(function () {
       $("#playAudio").on("click", () => {
         audio.play();
       });
-
     } else {
       // If the title is not found, display a message
       $("#raw").html(`<p>"${searchWord}" is not found.</p>`);

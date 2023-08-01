@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" id="html" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <title id="title">Facidol Dictionary</title>
+    <link href="../assets/image/favicon.ico" rel="icon" />
+
+    <!-- og -->
+    <meta property="og:url" content="https://mirusausiliq.com/facidol-dict" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Facidol Dictionary" />
+    <meta
+      property="og:description"
+      content="Online Formosan Language Dictionary"
+    />
+    <meta property="og:image" content="https://i.imgur.com/wRJhwP0.gif" />
+    <meta property="og:image:width" content="auto" />
+    <meta property="og:image:height" content="auto" />
+    <meta
+      name="keywords"
+      content="Dictionary, Treasury, Formosan Language, Amis, Atayal, Bunun, Kanakanavu, Paiwan, ..."
+    />
+    <meta name="description" content="Online Formosan Language Dictionary" />
+
+    <!-- Bootstrap 5 -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" /> -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/all.css"
+    />
+
+    <!-- Local Font Awesome -->
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/fontawesome.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/brands.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/solid.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/regular.css"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Tocas UI -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.4/tocas.min.css" />-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/tocas.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.4/tocas.min.js"></script>
+  </head>
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+
+  <style>
+    #autocomplete-list {
+      max-height: 200px;
+      overflow-y: scroll;
+      /*border: 1px solid #ccc;*/
+      background-color: rgb(0, 0, 0);
+    }
+
+    #autocomplete-list li {
+      cursor: pointer;
+    }
+
+    #autocomplete-list li:hover {
+      color: white;
+    }
+
+    .selected {
+      background-color: #f0f0f0; /* Highlight the selected item with a different background color */
+    }
+  </style>
+
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md fixed-top backdrop-filter">
+      <div class="container-fluid navbar-container">
+        <div class="nav-item">
+          <a type="button" href="../index.html" class="btn nav-link"
+            ><i class="fa-solid fa-fire"></i> Facidol
+          </a>
+        </div>
+
+        <a
+          type="button"
+          class="btn navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expended="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </a>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="./amidict.html" class="nav-link" id="articles"
+                >Amis Dictionary</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" id="about"> About </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://github.com/mirusausiliq/facidol-dict"
+                class="nav-link"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://discord.gg/wSECrwgqhV"
+                class="nav-link"
+                target="_blank"
+              >
+                <i class="fa-brands fa-discord"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://bmc.link/mirusausilq"
+                class="nav-link"
+                target="_blank"
+              >
+                <i class="fa-solid fa-mug-hot"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" onclick="changeTheme()">
+                <i class="fa-solid fa-moon" id="theme_icon"></i>
+              </a>
+              <script
+                type="text/javascript"
+                src="../assets/js/changeTheme.js"
+              ></script>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- main -->
+    <div class="container-fluid">
+      <div clas="row" style="padding-top: 65.75px"></div>
+    </div>
+
+    <div class="ts-content is-vertically-padded">
+          <div class="ts-grid is-evenly-divided is-relaxed u-top-spaced-big">
+            <div class="column">
+              <div class="ts-box is-horizontal">
+                <div class="ts-content">
+                  <div class="ts-header is-big is-heavy">超奇異故事</div>
+                  <div class="ts-text is-bold is-secondary">1 個星期前</div>
+                  <p>
+                    這張卡片和左邊那個基本上是一樣啦，差異只在於這章卡片的文字有所不同。不過廢話當然也不能少。
+                  </p>
+                  <a class="ts-text is-link is-undecorated" href="#!"
+                    >繼續閱讀</a
+                  >
+                </div>
+                <div class="ts-image is-covered">
+                  <img
+                    src="../assets/image/herta01.gif"
+                    style="width: 200px; height: auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ts-grid is-relaxed u-top-spaced-big">
+            <div class="column is-11-wide">
+              <div class="ts-text is-big is-italic is-bold">最新消息</div>
+
+              <div>
+                <div class="ts-divider"></div>
+              </div>
+
+              <div class="u-top-spaced">
+                <div class="ts-header is-huge is-heavy">範例文章第一篇</div>
+                <div class="ts-meta is-secondary">
+                  <a href="#!" class="item">2023 年 8 月 1 日</a>
+                  <a href="#!" class="item">3 篇留言</a>
+                  <a href="#!" class="ts-text is-link is-undecorated item"
+                    >Mirusa Usiliq</a
+                  >
+                </div>
+                <p>
+                  這是一個由 Tocas UI
+                  框架所製成的簡易部落格，只要有基本的觀念就可以在幾分鐘內快速建置一個部落格型態的網站，並且支援多個元件與多種語義。
+                </p>
+                <div class="ts-divider is-section"></div>
+                <p>
+                  臺灣西與西北臨臺灣海峽，距歐亞大陸（主要距福建）海岸平均距離約200公里，臺灣海峽最窄之處為臺灣新竹縣到中國福建省平潭島，直線距離約130公里；北邊隔東海與朝鮮半島相望；東北隔海與琉球群島相望；西南邊為南海，距中國廣東省海岸直線距離約300公里；東邊為太平洋，和日本沖繩縣與那國島相鄰約
+                  110
+                  公里；南邊則隔巴士海峽與菲律賓群島相鄰。在西太平洋由千島群島、日本、琉球群島、臺灣、菲律賓等眾多島嶼所形成的島弧花綵列島中，臺灣位於中樞位置。由地緣政治理論上來看，臺灣正好位於東亞島弧中央區域，居東北亞與東南亞交會處，為亞太經貿運輸重要樞紐及重要戰略要地，北迴歸線橫跨中南部。
+                </p>
+                <div class="ts-header is-big is-heavy">段落標題</div>
+                <p>
+                  臺灣南北縱長約 395 公里，東西寬度最大約 144
+                  公里，環島海岸線長約 1139 公里，含屬島面積約 35882.6258
+                  平方公里，四面環海，島嶼整體形狀似長條蕃薯狀。臺灣四面環海，孕育了各種海岸地形。
+                </p>
+                <div class="ts-header is-large is-heavy">引用範例</div>
+                <div class="ts-quote u-top-spaced">
+                  臺灣是由歐亞大陸板塊、沖繩板塊和菲律賓海板塊擠壓而隆起的島嶼。臺灣主要是由兩個板塊的聚合作用產生，分別歸屬於歐亞板塊以及菲律賓海板塊。
+                  <div class="cite">維基百科</div>
+                </div>
+                <p>
+                  由於最大分水嶺中央山脈分布位置偏東，使得主要的河川大多分布在西半部，包括長度最長位居中部地區的濁水溪，流域最廣位居南部地區的高屏溪，以及長度與流域面積均為第三而位居北部地區的淡水河。其他尚有頭前溪、後龍溪、大安溪、大甲溪、烏溪、曾文溪等；而東半部主要河川則有蘭陽溪、立霧溪、花蓮溪、秀姑巒溪、卑南溪等。臺灣的天然湖泊稀少，最大的是日月潭，可能經由隕石撞擊形成的嘉明湖等，其餘多是人工修築的埤塘、水庫居多。
+                </p>
+              </div>
+              <div class="u-top-spaced">
+                <div class="ts-header is-huge is-heavy">早安，世界！</div>
+                <div class="ts-meta is-secondary">
+                  <a href="#!" class="item">2023 年 8 月 1 日</a>
+                  <a href="#!" class="item">1 篇留言</a>
+                  <a href="#!" class="ts-text is-link is-undecorated item"
+                    >Mirusa Usiliq</a
+                  >
+                </div>
+                <p>
+                  臺灣可分為兩個氣候區，大致以通過中南部嘉義縣及花蓮縣的北回歸線為界，中部及北部屬亞熱帶季風氣候，嘉義以南屬熱帶季風氣候。5
+                  月到 9
+                  月為臺灣的夏季，天氣炎熱，其中大臺北地區是盆地地形，以致熱能無法快速消散，又加上都市熱島效應影響，因此夏季最高氣溫經常可達
+                  35℃ 及以上，7 月的平均氣溫可接近 30℃。
+                </p>
+                <div class="ts-header is-big is-heavy">清單範例</div>
+                <p>
+                  臺灣目前總人口約 23,248,953（2016 年 3 月統計），可分為 5
+                  大族群：閩南人（河洛人）、客家人、外省人、原住民族、新住民。
+                </p>
+                <div class="ts-list is-unordered">
+                  <div class="item">
+                    臺灣位於亞熱帶與熱帶，以及歐亞大陸與太平洋的交界處。
+                  </div>
+                  <div class="item">
+                    另外高山對季風的阻擋能使島內環境變化較大，例如降雨量的差異。
+                  </div>
+                  <div class="item">
+                    臺灣的海岸線與鄰近海岸地區，過去擁有廣大的紅樹林與沼澤，並因此孕育許多生活在潮間帶的動物。
+
+                    <div class="ts-list is-unordered">
+                      <div class="item">
+                        但現今大多已經消失，只保留在例如臺南的七股濕地與臺北的淡水河河口等少數區域。
+                      </div>
+                      <div class="item">
+                        大型野生動物大多僅能分布在山區或較稀少的低海拔森林中。
+                      </div>
+                      <div class="item">
+                        由於棲地破壞和外來種引入，造成臺灣部分原生物種負面影響，有些甚至瀕臨滅絕或已滅絕。
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    為保護自然風景及野生動植物，中華民國內政部營建署自 1982
+                    年起已公告成立 9 座國家公園。
+                  </div>
+                </div>
+                <p>
+                  在日治時期前期，臺灣在日本經濟上的地位是糧食生產與資源出口基地，僅有少數的食物儲藏加工業和輕工業<span
+                    class="ts-text is-sup"
+                    >[95]</span
+                  >，在太平洋戰爭爆發後，臺灣因戰略地位被日本政府重新定位為南進基地，因此在臺灣南部的高雄一帶發展軍事工業。國民政府遷臺後，將臺灣視為武力反攻大陸的基地，奉行軍事優先和穩定農業的經濟政策。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- footer -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-md-8">
+
+          <div>
+            <br />
+          </div>
+
+          <div class="ts-content is-vertically-very-padded">
+            <div class="ts-container">
+              <div class="ts-center">
+                <div class="ts-header is-heavy">Facidol Dictionary</div>
+                <div class="ts-text is-description">© 2023 Mirusa Usiliq & Facidol Dictionary. All rights reserved.</div>
+              </div>
+            </div>
+          </div>
+
+         </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+  </body>
+</html>
