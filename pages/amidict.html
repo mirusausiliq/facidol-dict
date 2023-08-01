@@ -223,6 +223,22 @@
             type="text/javascript"
             src="../assets/js/ami-dict.js"
           ></script>
+          <script>
+            $(document).ready(function() {
+              const ipaInput = $('#search-input');
+              const playButton = $('#playAudio');
+        
+              playButton.on('click', () => {
+                const text = ipaInput.val();
+                if ('speechSynthesis' in window) {
+                  const utterance = new SpeechSynthesisUtterance(text);
+                  speechSynthesis.speak(utterance);
+                } else {
+                  alert('Text-to-speech is not supported in this browser.');
+                }
+              });
+            });
+          </script>
         </div>
         <div class="col-2"></div>
       </div>

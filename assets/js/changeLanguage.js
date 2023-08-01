@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+$(document).ready(function () {
   const languages = {
     eng: {
       language: "Language",

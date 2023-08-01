@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IPA to Audio</title>
+</head>
+<body>
+  <h1>IPA to Audio</h1>
+  <label for="ipaInput">Enter IPA representation:</label>
+  <input type="text" id="ipaInput">
+  <button id="playButton">Play</button>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const ipaInput = $('#ipaInput');
+      const playButton = $('#playButton');
+
+      playButton.on('click', () => {
+        const text = ipaInput.val();
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          speechSynthesis.speak(utterance);
+        } else {
+          alert('Text-to-speech is not supported in this browser.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

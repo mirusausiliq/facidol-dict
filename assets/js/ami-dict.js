@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+$(document).ready(function () {
   const ipaData = {
     a: "a",
     b: "b",
@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
     e: "ə",
     f: "f",
     //g: " -",
-    h: "ħ",
+    h: "h",
     i: "i",
     //j: " -",
     k: "k",
@@ -18,10 +18,10 @@ jQuery(document).ready(function () {
     o: "o",
     p: "p",
     //q: " -",
-    r: "r",
+    r: "ɾ",
     s: "s",
     t: "t",
-    u: "ʊ",
+    u: "u",
     v: "v",
     w: "w",
     x: "x",
@@ -35,6 +35,9 @@ jQuery(document).ready(function () {
 
   const jsonURL =
     "https://raw.githubusercontent.com/g0v/amis-moedict/master/dict-amis-safolu.json";
+
+  const originURL =
+    "https://hts.ithuan.tw/%E6%96%87%E6%9C%AC%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90?%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=Pangcah&%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=";
 
   let jsonData = null;
   $.getJSON(jsonURL, function (data) {
@@ -57,10 +60,7 @@ jQuery(document).ready(function () {
 
       // Check if the character exists in the ipaData JSON
       if (ipaData.hasOwnProperty(character)) {
-        if (
-          lowercaseWord[i] == "n" &&
-          lowercaseWord[i + 1] == "g"
-        ) {
+        if (lowercaseWord[i] == "n" && lowercaseWord[i + 1] == "g") {
           ipaRepresentation += ipaData["ng"];
           i++;
         } else {
@@ -82,17 +82,28 @@ jQuery(document).ready(function () {
     // Clear the previous content
     $("#raw").empty();
 
+    const audioURL = `${originURL}${searchWord}`;
+    const audio = new Audio(audioURL);
+
     // Search for the title in the JSON data
-    const foundEntry = jsonData.find(
-      (entry) => entry.title === searchWord
-    );
+    const foundEntry = jsonData.find((entry) => entry.title === searchWord);
 
     if (foundEntry) {
       const title = foundEntry.title;
       const heteronyms = foundEntry.heteronyms;
       var i = 0;
 
-      let html = `<h2>${title}</h2>`;
+      let html = `<div style="display: inline-block;">
+                    <h2>${title}</h2>
+                    <audio controls>
+                      <source src="${audioURL}" type="audio/mp3">
+                    </audio>
+                  </div>
+                 `;
+
+      $("#playAudio").on("click", () => {
+        audio.play();
+      });
 
       if (title) {
         html += `<p>IPA: [${generateIPA(title)}]</p>`;
@@ -133,6 +144,12 @@ jQuery(document).ready(function () {
 
       // Append the rendered content to the #raw div
       $("#raw").append(html);
+
+      // Attach the click event to the play button after it is added to the DOM
+      $("#playAudio").on("click", () => {
+        audio.play();
+      });
+
     } else {
       // If the title is not found, display a message
       $("#raw").html(`<p>"${searchWord}" is not found.</p>`);
@@ -141,10 +158,7 @@ jQuery(document).ready(function () {
 
   // Function to handle the search button click event
   const handleSearch = () => {
-    const searchWord = $("#search-input")
-      .val()
-      .trim()
-      .toLowerCase();
+    const searchWord = $("#search-input").val().trim().toLowerCase();
 
     if (searchWord) {
       renderJSONByTitle(jsonData, searchWord);
@@ -173,10 +187,7 @@ jQuery(document).ready(function () {
       $("#autocomplete-list").html("");
     } else {
       const autocompleteItems = matchingWords
-        .map(
-          (entry) =>
-            `<li class="list-group-item">${entry.title}</li>`
-        )
+        .map((entry) => `<li class="list-group-item">${entry.title}</li>`)
         .join("");
       $("#autocomplete-list").html(autocompleteItems);
     }
