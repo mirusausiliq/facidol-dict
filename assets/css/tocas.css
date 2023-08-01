@@ -11260,7 +11260,7 @@ button {
     border: 1px solid var(--ts-gray-300);
     border-radius: 0.4rem;
     overflow: hidden;
-    background: var(--ts-gray-50);
+    background: inherit;
 }
 
 a.ts-box:hover {

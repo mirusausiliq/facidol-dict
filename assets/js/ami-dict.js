@@ -80,7 +80,7 @@ $(document).ready(function () {
   // Function to render the JSON data for a specific title
   const renderJSONByTitle = (jsonData, searchWord) => {
     // Clear the previous content
-    $("#raw").empty();
+    $("#word").empty();
 
     const audioURL = `${originURL}${searchWord}`;
     const audio = new Audio(audioURL);
@@ -93,21 +93,34 @@ $(document).ready(function () {
       const heteronyms = foundEntry.heteronyms;
       var i = 0;
 
-      let html = `<div style="display: inline-block;">
+      let html = `
                     <h2>${title}</h2>
-                    <p>${foundEntry.stem ? `Stem: ${foundEntry.stem}` : ''}</p>
-                    <p>IPA: [${generateIPA(title)}]</p>
-                    <audio controls class="embed-responsive-item">
-                      <source src="${audioURL}" type="audio/mp3">
-                    </audio>
-                  </div>
+                    <div class="ts-divider is-section"></div>
                  `;
 
-      $("#playAudio").on("click", () => {
-        audio.play();
-      });
+      if (title.startsWith("mi") || title.startsWith("ma") || title.startsWith("om", 1) || title.startsWith("tala")) {
+        html += `<p>詞性 POS: Verb 動詞</p>`;
+      } else {
+        html += `<p>詞性 POS: Unknown???</p>`;
+      }
 
-
+      if (foundEntry.stem) {
+        html += `
+                 <p>詞根 Stem: ${foundEntry.stem}</p>
+                 <p>音標 IPA: /${generateIPA(title)}/</p>
+                 <audio controls class="embed-responsive-item">
+                   <source src="${audioURL}" type="audio/mp3">
+                 </audio>
+        `;
+      } else {
+        html += `
+                 <p>詞根 Stem: Uknown?</p>
+                 <p>音標IPA: /${generateIPA(title)}/</p>
+                 <audio controls class="embed-responsive-item">
+                   <source src="${audioURL}" type="audio/mp3">
+                 </audio>
+        `;
+      }
 
       html += `<h3>- Definitions</h3>`;
       heteronyms.forEach((heteronym) => {
@@ -132,7 +145,7 @@ $(document).ready(function () {
           }
 
           if (definition.synonyms) {
-            html += `<h3>Synonyms</h3>`
+            html += `<h3>- Synonyms</h3>`;
             definition.synonyms.forEach((synonyms) => {
               html += `<p><i>${synonyms}</i></p>`;
             });
@@ -142,44 +155,52 @@ $(document).ready(function () {
 
       if (title.startsWith("mi")) {
         const stem = foundEntry.stem;
-        let firstChar = "";
-        
-        if (stem.charAt(0) == ('a' || 'e' || 'i' || 'o' || 'u')) {
+        let fC = "";
+
+        if (stem.charAt(0) == ("a" || "e" || "i" || "o" || "u")) {
         } else {
-          firstChar = stem.charAt(0);
+          fC = stem.charAt(0);
         }
 
         html += `<h3>- Conjugations<h3>`;
         html += `
-          <div class="ts-box">
-            <table class="ts-table">
-                <tbody>
-                  <tr>
-                  <td>AFF.</td>
-                  <td>act.</td>
-                  <td>psv.nrm.</td>
-                  <td>psv.cst.</td>
-                  <td>ins.</td>
-                  <td>loc.</td>
+          <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
+            <table class="ts-table is-celled table-hover">
+              <tbody>
+                <tr>
+                  <td>肯定 AFF.</td>
+                  <td>主事焦點 act.</td>
+                  <td>受事焦點 pss.</td>
+                  <td></td>
+                  <td>工具焦點 ins.</td>
+                  <td>處所焦點 loc.</td>
                 </tr>
                 <tr>
-                  <td>nrm.</td>
-                  <td>mi-${stem}</td>
-                  <td>ma-${stem}</td>
-                  <td>${stem}-en</td>
+                  <td></td>
+                  <td></td>
+                  <td>被動 (ma-)</td>
+                  <td>處置 (-en)</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>一般體nrm.</td>
+                  <td>  mi-${stem}</td>
+                  <td>  ma-${stem}</td>
+                  <td>     ${stem}-en</td>
                   <td>sapi-${stem}</td>
-                  <td>pi-${stem}en</td>
+                  <td>  pi-${stem}-an</td>
                 </tr>
                 <tr>
-                  <td>ipf.</td>
-                  <td>mami-${stem}</td>
-                  <td>mama-${stem}</td>
-                  <td>${firstChar}a-${stem}-en</td>
+                  <td>將行體 ipf.</td>
+                  <td> ma-mi-${stem}</td>
+                  <td> ma-ma-${stem}</td>
+                  <td>${fC}a-${stem}-en</td>
                   <td>...</td>
                   <td>...</td>
                 </tr>
                 <tr>
-                  <td>prf.</td>
+                  <td>已行體 prf.</td>
                   <td>mi-${stem}-ay</td>
                   <td>ma-${stem}-ay</td>
                   <td>mi-${stem}-an</td>
@@ -192,35 +213,43 @@ $(document).ready(function () {
           <br />
         `;
         html += `
-        <div class="ts-box">
-          <table class="ts-table">
-              <tbody>
-                <tr>
-                <td>NGT.</td>
-                <td>act.</td>
-                <td>psv.nrm.</td>
-                <td>psv.cst.</td>
-                <td>ins.</td>
-                <td>loc.</td>
+        <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
+          <table class="ts-table is-celled table-hover">
+            <tbody>
+              <tr>
+                <td>否定 NGT.</td>
+                <td>主事焦點 act.</td>
+                <td>受事焦點 pss.</td>
+                <td></td>
+                <td>工具焦點 ins.</td>
+                <td>處所焦點 loc.</td>
               </tr>
               <tr>
-                <td>nrm.</td>
-                <td>caay mi-${stem}</td>
-                <td>caay ma-${stem}</td>
-                <td>caay ${stem}-en</td>
+                <td></td>
+                <td></td>
+                <td>被動 (ma-)</td>
+                <td>處置 (-en)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>一般體 nrm.</td>
+                <td>  caay mi-${stem}</td>
+                <td>  caay ma-${stem}</td>
+                <td>     caay ${stem}-en</td>
                 <td>caay sapi-${stem}</td>
-                <td>caay pi-${stem}en</td>
+                <td> caay pi-${stem}en</td>
               </tr>
               <tr>
-                <td>ipf.</td>
-                <td>caay mami-${stem}</td>
-                <td>caay mama-${stem}</td>
-                <td>${firstChar}a-${stem}-en</td>
+                <td>將行體 ipf.</td>
+                <td>        caay mami-${stem}</td>
+                <td>        caay mama-${stem}</td>
+                <td>      caay ${fC}a-${stem}-en</td>
                 <td>...</td>
                 <td>...</td>
               </tr>
               <tr>
-                <td>prf.</td>
+                <td>已行體 prf.</td>
                 <td>caay mi-${stem}-ay</td>
                 <td>caay ma-${stem}-ay</td>
                 <td>caay mi-${stem}-an</td>
@@ -230,52 +259,61 @@ $(document).ready(function () {
             </tbody>
           </table>
         </div>
-      `;
+        <br />
+        `;
       }
 
       if (title.startsWith("ma")) {
         const stem = foundEntry.stem;
-        let firstChar = "";
-        
-        if (stem.charAt(0) == ('a' || 'e' || 'i' || 'o' || 'u')) {
+        let fC = "";
+
+        if (stem.charAt(0) == ("a" || "e" || "i" || "o" || "u")) {
         } else {
-          firstChar = stem.charAt(0);
+          fC = stem.charAt(0);
         }
 
         html += `<h3>- Conjugations<h3>`;
         html += `
-          <div class="ts-box">
-            <table class="ts-table">
-                <tbody>
-                  <tr>
-                  <td>AFF.</td>
-                  <td>act.</td>
-                  <td>psv.nrm.</td>
-                  <td>psv.cst.</td>
-                  <td>ins.</td>
-                  <td>loc.</td>
+          <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
+            <table class="ts-table is-celled table-hover">
+              <tbody>
+                <tr>
+                  <td>肯定 AFF.</td>
+                  <td>主事焦點 act.</td>
+                  <td>受事焦點 pss.</td>
+                  <td></td>
+                  <td>工具焦點 ins.</td>
+                  <td>處所焦點 loc.</td>
                 </tr>
                 <tr>
-                  <td>nrm.</td>
-                  <td>ma-${stem}</td>
+                  <td></td>
+                  <td></td>
+                  <td>被動 (ma-)</td>
+                  <td>處置 (-en)</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>一般體nrm.</td>
+                  <td>  ma-${stem}</td>
                   <td>...</td>
-                  <td>ma-${stem}-en</td>
+                  <td>  ma-${stem}-en</td>
                   <td>saka-${stem}</td>
-                  <td>ka-${stem}en</td>
+                  <td>  ka-${stem}-an</td>
                 </tr>
                 <tr>
-                  <td>ipf.</td>
-                  <td>mama-${stem}</td>
-                  <td>mama-${stem}</td>
-                  <td>mama-${stem}-en</td>
+                  <td>將行體 ipf.</td>
+                  <td> ma-mi-${stem}</td>
+                  <td> ma-ma-${stem}</td>
+                  <td> ma-ma-${stem}-en</td>
                   <td>...</td>
                   <td>...</td>
                 </tr>
                 <tr>
-                  <td>prf.</td>
+                  <td>已行體 prf.</td>
                   <td>ma-${stem}-ay</td>
                   <td>ma-${stem}-ay</td>
-                  <td>${stem}-an</td>
+                  <td>   ${stem}-an</td>
                   <td>...</td>
                   <td>...</td>
                 </tr>
@@ -285,101 +323,168 @@ $(document).ready(function () {
           <br />
         `;
         html += `
-        <div class="ts-box">
-          <table class="ts-table">
-              <tbody>
-                <tr>
-                <td>NGT.</td>
-                <td>act.</td>
-                <td>psv.nrm.</td>
-                <td>psv.cst.</td>
-                <td>ins.</td>
-                <td>loc.</td>
+        <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
+          <table class="ts-table is-celled table-hover">
+            <tbody>
+              <tr>
+                <td>肯定 AFF.</td>
+                <td>主事焦點 act.</td>
+                <td>受事焦點 pss.</td>
+                <td></td>
+                <td>工具焦點 ins.</td>
+                <td>處所焦點 loc.</td>
               </tr>
               <tr>
-                <td>nrm.</td>
-                <td>caay ma-${stem}</td>
+                <td></td>
+                <td></td>
+                <td>被動 (ma-)</td>
+                <td>處置 (-en)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>一般體nrm.</td>
+                <td>  caay ma-${stem}</td>
                 <td>...</td>
-                <td>caay ma-${stem}-en</td>
+                <td>  caay ma-${stem}-en</td>
                 <td>caay saka-${stem}</td>
-                <td>caay ka-${stem}en</td>
+                <td>  caay ka-${stem}-an</td>
               </tr>
               <tr>
-                <td>ipf.</td>
-                <td>caay mama-${stem}</td>
-                <td>caay mama-${stem}</td>
-                <td>caay mama-${stem}-en</td>
+                <td>將行體 ipf.</td>
+                <td>caay ma-mi-${stem}</td>
+                <td>caay ma-ma-${stem}</td>
+                <td>caay ma-ma-${stem}-en</td>
                 <td>...</td>
                 <td>...</td>
               </tr>
               <tr>
-                <td>prf.</td>
+                <td>已行體 prf.</td>
                 <td>caay ma-${stem}-ay</td>
                 <td>caay ma-${stem}-ay</td>
-                <td>caay ${stem}-an</td>
+                <td>   caay ${stem}-an</td>
                 <td>...</td>
                 <td>...</td>
               </tr>
             </tbody>
           </table>
         </div>
-      `;
+        <br />
+        `;
       }
 
       if (title.startsWith("om", 1)) {
         const stem = foundEntry.title;
-        let firstChar = "";
-        
-        if (stem.charAt(0) == ('a' || 'e' || 'i' || 'o' || 'u')) {
+        let fC = "";
+
+        if (stem.charAt(0) == ("a" || "e" || "i" || "o" || "u")) {
         } else {
-          firstChar = stem.charAt(0);
+          fC = stem.charAt(0);
         }
 
         html += `<h3>- Conjugations<h3>`;
         html += `
-          <div class="ts-box">
-            <table class="ts-table">
-                <tbody>
-                  <tr>
-                  <td>AFF.</td>
-                  <td>act.</td>
-                  <td>psv.nrm.</td>
-                  <td>psv.cst.</td>
-                  <td>ins.</td>
-                  <td>loc.</td>
+          <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
+            <table class="ts-table is-celled table-hover">
+              <tbody>
+                <tr>
+                  <td>肯定 AFF.</td>
+                  <td>主事焦點 act.</td>
+                  <td>受事焦點 pss.</td>
+                  <td></td>
+                  <td>工具焦點 ins.</td>
+                  <td>處所焦點 loc.</td>
                 </tr>
                 <tr>
-                  <td>nrm.</td>
-                  <td>${stem}</td>
-                  <td>...</td>
-                  <td>${stem}-en</td>
-                  <td>saka-${stem}</td>
-                  <td>ka-${stem}en</td>
+                  <td></td>
+                  <td></td>
+                  <td>被動 (ma-)</td>
+                  <td>處置 (-en)</td>
+                  <td></td>
+                  <td></td>
                 </tr>
                 <tr>
-                  <td>ipf.</td>
-                  <td>mama-${stem}</td>
-                  <td>mama-${stem}</td>
-                  <td>mama-${stem}-en</td>
+                  <td>一般體nrm.</td>
+                  <td>  mi-${title}</td>
+                  <td>  ma-${title}</td>
+                  <td>     ${title}-en</td>
+                  <td>sapi-${title}</td>
+                  <td>  pi-${title}en</td>
+                </tr>
+                <tr>
+                  <td>將行體 ipf.</td>
+                  <td>  mami-${title}</td>
+                  <td>  mama-${title}</td>
+                  <td>${fC}a-${title}-en</td>
                   <td>...</td>
                   <td>...</td>
                 </tr>
                 <tr>
-                  <td>prf.</td>
-                  <td>ma-${stem}-ay</td>
-                  <td>ma-${stem}-ay</td>
-                  <td>${stem}-an</td>
+                  <td>已行體 prf.</td>
+                  <td>mi-${title}-ay</td>
+                  <td>ma-${title}-ay</td>
+                  <td>mi-${title}-an</td>
                   <td>...</td>
                   <td>...</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <br />
+        `;
+        html += `
+        <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
+          <table class="ts-table is-celled table-hover">
+            <tbody>
+              <tr>
+                <td>否定 NGT.</td>
+                <td>主事焦點 act.</td>
+                <td>受事焦點 pss.</td>
+                <td></td>
+                <td>工具焦點 ins.</td>
+                <td>處所焦點 loc.</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>被動 (ma-)</td>
+                <td>處置 (-en)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>一般體 nrm.</td>
+                <td>  caay ${title}</td>
+                <td>  caay ${title}</td>
+                <td>     caay ${title}-en</td>
+                <td>caay sapi-${title}</td>
+                <td> caay pi-${title}en</td>
+              </tr>
+              <tr>
+                <td>將行體 ipf.</td>
+                <td>        caay mami-${title}</td>
+                <td>        caay mama-${title}</td>
+                <td>caay ${fC}a-${title}-en</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+              <tr>
+                <td>已行體 prf.</td>
+                <td>caay mi-${title}-ay</td>
+                <td>caay ma-${title}-ay</td>
+                <td>caay mi-${title}-an</td>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br />
         `;
       }
 
       // Append the rendered content to the #raw div
-      $("#raw").append(html);
+      $("#word").append(html);
 
       // Attach the click event to the play button after it is added to the DOM
       $("#playAudio").on("click", () => {

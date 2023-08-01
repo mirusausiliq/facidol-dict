@@ -1,30 +1,279 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>IPA to Audio</title>
-</head>
-<body>
-  <h1>IPA to Audio</h1>
-  <label for="ipaInput">Enter IPA representation:</label>
-  <input type="text" id="ipaInput">
-  <button id="playButton">Play</button>
+<html lang="en" id="html" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <title id="title">Facidol Dictionary</title>
+    <link href="../assets/image/favicon.ico" rel="icon" />
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      const ipaInput = $('#ipaInput');
-      const playButton = $('#playButton');
+    <!-- og -->
+    <meta property="og:url" content="https://mirusausiliq.com/facidol-dict" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Facidol Dictionary" />
+    <meta
+      property="og:description"
+      content="Online Formosan Language Dictionary"
+    />
+    <meta property="og:image" content="https://i.imgur.com/wRJhwP0.gif" />
+    <meta property="og:image:width" content="auto" />
+    <meta property="og:image:height" content="auto" />
+    <meta
+      name="keywords"
+      content="Dictionary, Treasury, Formosan Language, Amis, Atayal, Bunun, Kanakanavu, Paiwan, ..."
+    />
+    <meta name="description" content="Online Formosan Language Dictionary" />
 
-      playButton.on('click', () => {
-        const text = ipaInput.val();
-        if ('speechSynthesis' in window) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          speechSynthesis.speak(utterance);
-        } else {
-          alert('Text-to-speech is not supported in this browser.');
-        }
-      });
-    });
-  </script>
-</body>
+    <!-- Bootstrap 5 -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" /> -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Tocas UI -->
+    <!--
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.4/tocas.min.css"
+    />-->
+    <link rel="stylesheet" type="text/css" href="../assets/css/tocas.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.4/tocas.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/fontawesome.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/brands.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/solid.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../assets/fontawesome/css/regular.css"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
+
+  <style>
+    #autocomplete-list {
+      max-height: 200px;
+      overflow-y: scroll;
+      /*border: 1px solid #ccc;*/
+      background-color: rgb(0, 0, 0);
+    }
+
+    #autocomplete-list li {
+      cursor: pointer;
+    }
+
+    #autocomplete-list li:hover {
+      color: white;
+    }
+
+    .selected {
+      background-color: #f0f0f0; /* Highlight the selected item with a different background color */
+    }
+  </style>
+
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md fixed-top backdrop-filter">
+      <div class="container-fluid navbar-container">
+        <div class="nav-item">
+          <a type="button" href="../index.html" class="btn nav-link"
+            ><i class="fa-solid fa-fire"></i> Facidol
+          </a>
+        </div>
+
+        <a
+          type="button"
+          class="btn navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expended="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </a>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="./amidict.html" class="nav-link" id="articles"
+                >Amis Dictionary</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="./about.html" class="nav-link" id="about"> About </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://github.com/mirusausiliq/facidol-dict"
+                class="nav-link"
+                target="_blank"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://discord.gg/wSECrwgqhV"
+                class="nav-link"
+                target="_blank"
+              >
+                <i class="fa-brands fa-discord"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="https://bmc.link/mirusausilq"
+                class="nav-link"
+                target="_blank"
+              >
+                <i class="fa-solid fa-mug-hot"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" onclick="changeTheme()">
+                <i class="fa-solid fa-moon" id="theme_icon"></i>
+              </a>
+              <script
+                type="text/javascript"
+                src="../assets/js/changeTheme.js"
+              ></script>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- main -->
+    <div class="container-fluid">
+      <div clas="row" style="padding-top: 65.75px"></div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-md-8">
+          <div>
+            <h1>Amis</h1>
+            <h1>Dictionary</h1>
+          </div>
+          <br />
+
+          <div class="input-group mb-3">
+            <button type="button" class="btn btn-warning" id="search-btn">
+              Search
+            </button>
+            <input
+              type="text"
+              id="search-input"
+              class="form-control"
+              placeholder="Enter..."
+            />
+          </div>
+
+          <div>
+            <ul class="list-group" id="autocomplete-list"></ul>
+          </div>
+
+          <div id="word">
+            <!-- The rendered JSON will be displayed here -->
+          </div>
+
+          <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"
+          ></script>
+          <script
+            type="text/javascript"
+            src="../assets/js/ami-dict.js"
+          ></script>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-md-8">
+          <div>
+            <br />
+          </div>
+          <button class="btn btn-danger" data-dropdown="dropdown">
+            <span class="fa-solid fa-language"></span>
+            <span id="language">Language</span>
+          </button>
+          <div
+            class="ts-dropdown"
+            data-name="dropdown"
+            style="max-height: 200px; overflow-y: scroll"
+          >
+            <button id="eng" class="item">English</button>
+            <button id="chn" class="item">Chinese</button>
+            <button id="jpn" class="item">Japanese</button>
+            <button id="kor" class="item">Korean</button>
+            <button id="por" class="item">Portuguese</button>
+            <button id="spa" class="item">Spanish</button>
+            <button id="fre" class="item">French</button>
+            <button id="ger" class="item">German</button>
+            <button id="ami" class="item">Amis</button>
+
+            <script
+              type="text/javascript"
+              src="../assets/js/changeLanguage.js"
+            ></script>
+          </div>
+
+          <div>
+            <br />
+          </div>
+
+          <h2>✧*｡ ʕ•ᴥ•ʔ Thanks For Visiting! ✧*｡</h2>
+
+          <div>
+            <br />
+          </div>
+
+          <p>© 2023 Mirusa Usiliq & Facidol Dictionary. All rights reserved</p>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+  </body>
 </html>
