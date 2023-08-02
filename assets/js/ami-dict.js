@@ -39,6 +39,8 @@ $(document).ready(function () {
   const originURL =
     "https://hts.ithuan.tw/%E6%96%87%E6%9C%AC%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90?%E6%9F%A5%E8%A9%A2%E8%85%94%E5%8F%A3=Pangcah&%E6%9F%A5%E8%A9%A2%E8%AA%9E%E5%8F%A5=";
 
+  const amisMDURL = 
+    "https://amis.moedict.tw/#:";
   //
   function generateIPA(word) {
     // Convert the word to lowercase for case-insensitive lookup
@@ -87,40 +89,88 @@ $(document).ready(function () {
       var i = 0;
 
       let html = `
-                    <h2>${title}</h2>
-                    <div class="ts-divider is-section"></div>
-                 `;
+        <h2>${title}</h2>
+        <div class="ts-divider is-section"></div>
+      `;
 
-      if (
-        title.startsWith("mi") ||
-        title.startsWith("ma") ||
-        title.startsWith("om", 1) ||
-        title.startsWith("tala")
-      ) {
-        html += `<p>詞性 POS: Verb 動詞</p>`;
+      let verbType = "";
+      let pos = "";
+      if (title.startsWith("mi")) {
+        verbType += "mi-";
+        pos += "vrb.";
+      } else if (title.startsWith("ma")) {
+        verbType += "ma-";
+        pos += "vrb.";
+      } else if (title.startsWith("om", 1)) {
+        verbType += "-om-";
+        pos += "vrb.";
+      } else if (title.startsWith("em", 1)) {
+        verbType += "-em-";
+        pos += "vrb.";
+      } else if (title.startsWith("tala") || title.startsWith("tala")) {
+        verbType += "tala- (ta-)";
+        pos += "vrb.";
+      } else if (title.startsWith("hali")) {
+        verbType += "hali-";
+        pos += "vrb.";
+      } else if (title.startsWith("maka")) {
+        verbType += "maka-";
+        pos += "vrb.";
+      } else if (title.endsWith("en")) {
+        verbType += "en-";
+        pos += "vrb.";
+      } else if (title.endsWith("an")) {
+        verbType += "-an";
+        pos += "vrb.";
+      } else if (title.endsWith("ay")) {
+        verbType += "-ay";
+        pos += "vrb.";
+      } else if (title == "ini") {
+        verbType += "ini";
+        pos += "vrb.";
+      } else if (title == "ira") {
+        verbType += "ira";
+        pos += "vrb.";
+      } else if (title == "tayni") {
+        verbType += "tayni";
+        pos += "vrb.";
+      } else if (title == "tayra") {
+        verbType += "tayra";
+        pos += "vrb.";
       } else {
-        html += `<p>詞性 POS: Unknown???</p>`;
+        pos += "nou./prn./adj./adv./ptc./ntj... (unknown)";
       }
 
-      if (foundEntry.stem) {
+      if (pos) {
+        if (verbType) {
+          html += `
+            <p>詞性 Part of Speech: ${verbType} ${pos}</p> 
+          `;
+        } else {
+          html += `
+            <p>詞性 Part of Speech: ${pos}</p>
+          `;
+        }
+
+        if (foundEntry.stem) {
+          html += `
+            <p>詞根 Stem: ${foundEntry.stem}</p>
+          `;
+        } else {
+          html += `
+            <p>詞根 Stem: ${title} (unclassified)</p>
+          `; 
+        }
+
         html += `
-                 <p>詞根 Stem: ${foundEntry.stem}</p>
-                 <p>音標 IPA: /${generateIPA(title)}/</p>
-                 <audio controls class="embed-responsive-item">
-                   <source src="${audioURL}" type="audio/mp3">
-                 </audio>
-        `;
-      } else {
-        html += `
-                 <p>詞根 Stem: Uknown?</p>
-                 <p>音標IPA: /${generateIPA(title)}/</p>
-                 <audio controls class="embed-responsive-item">
-                   <source src="${audioURL}" type="audio/mp3">
-                 </audio>
+          <p>音標 IPA: [${generateIPA(title)}]</p>
+          <audio controls class="embed-responsive-item">
+            <source src="${audioURL}" type="audio/mp3">
+          </audio>
         `;
       }
 
-      html += `<h3>- Definitions</h3>`;
+      html += `<h3>- 定義 Definitions</h3>`;
       heteronyms.forEach((heteronym) => {
         heteronym.definitions.forEach((definition) => {
           const def = definition.def;
@@ -143,7 +193,7 @@ $(document).ready(function () {
           }
 
           if (definition.synonyms) {
-            html += `<h3>- Synonyms</h3>`;
+            html += `<h3>- 近義詞 Synonyms</h3>`;
             definition.synonyms.forEach((synonyms) => {
               html += `<p><i>${synonyms}</i></p>`;
             });
@@ -160,7 +210,7 @@ $(document).ready(function () {
           fC = stem.charAt(0);
         }
 
-        html += `<h3>- Conjugations<h3>`;
+        html += `<h3>- 動詞變化 Conjugations<h3>`;
         html += `
           <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
             <table class="ts-table is-celled table-hover">
@@ -182,7 +232,7 @@ $(document).ready(function () {
                   <td></td>
                 </tr>
                 <tr>
-                  <td>一般體nrm.</td>
+                  <td>一般體 nrm.</td>
                   <td>  mi-${stem}</td>
                   <td>  ma-${stem}</td>
                   <td>     ${stem}-en</td>
@@ -270,7 +320,7 @@ $(document).ready(function () {
           fC = stem.charAt(0);
         }
 
-        html += `<h3>- Conjugations<h3>`;
+        html += `<h3>- 動詞變化 Conjugations<h3>`;
         html += `
           <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
             <table class="ts-table is-celled table-hover">
@@ -380,7 +430,7 @@ $(document).ready(function () {
           fC = stem.charAt(0);
         }
 
-        html += `<h3>- Conjugations<h3>`;
+        html += `<h3>- 動詞變化 Conjugations<h3>`;
         html += `
           <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
             <table class="ts-table is-celled table-hover">
@@ -481,6 +531,39 @@ $(document).ready(function () {
         `;
       }
 
+      const amismoedict = `${amisMDURL}${title}`;
+
+      html += `
+        <h3>- 參考 Reference</h3>
+        <ul>
+          <li>
+            <a href="${amismoedict}">阿美語萌典 蔡中涵大詞典 - ${title}</a>
+          </li>
+          <li>
+            朱清義 Kolas Foting (2020) O Lalelo^ no Sowal no Pangcah 新觀念阿美語語法
+          </li>
+          <li>
+            吳靜蘭 Wu, Jinglan (2022) O Kasawail no Sowal ato Lalelo no Pipasifana' 阿美語詞類及其教學
+          </li>
+          <li>
+            朱珍靜 Dakoc Lamelo (2022) 阿美語中的台灣閩南語及日語借詞
+          </li>
+        </ul>
+      `; 
+
+      html += `
+      <h3>- Credits</h3>
+      <ul>
+        <li>
+          The data of this dictionary is not owned by me. They are from 
+          <a href="https://github.com/g0v/amis-moedict">
+            Amis-Moedict project 
+          </a>
+          created by Miaoski, Lafin, Safulo Kacaw Lalanges Hakasi (蔡中涵) and the other contributors.
+        </li>
+      </ul>
+    `; 
+
       // Append the rendered content to the #raw div
       $("#raw").append(html);
 
@@ -494,18 +577,17 @@ $(document).ready(function () {
     }
   };
 
-  // Function to handle the search button click event
-  const handleSearch = () => {
-    const searchWord = $("#search-input").val().trim().toLowerCase();
-
-    if (searchWord) {
-      renderJSONByTitle(jsonData, searchWord);
-    }
-  };
-
-  let jsonData;
   $.getJSON(jsonURL, function (data) {
-    jsonData = data;
+    const jsonData = data;
+
+    // Function to handle the search button click event
+    const handleSearch = () => {
+      const searchWord = $("#search-input").val().trim().toLowerCase();
+
+      if (searchWord) {
+        renderJSONByTitle(jsonData, searchWord);
+      }
+    };
 
     // Bind the search button click event
     $("#search-btn").on("click", handleSearch);
