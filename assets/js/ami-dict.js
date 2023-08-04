@@ -28,8 +28,8 @@ $(document).ready(function () {
     y: "j",
     //z: " -",
     "'": "ʡ",
-    "^": "ʔ",
-    ":": "ː",
+    "^": "ʔ", // '  
+    ":": "ː", // ^ 
     " ": " ",
   };
 
@@ -144,11 +144,11 @@ $(document).ready(function () {
       if (pos) {
         if (verbType) {
           html += `
-            <p>詞性 Part of Speech: ${verbType} ${pos}</p> 
+            <p>詞性 Part of Speech: <span class="ts-badge is-negative">${verbType} ${pos}</span></p> 
           `;
         } else {
           html += `
-            <p>詞性 Part of Speech: ${pos}</p>
+            <p>詞性 Part of Speech: <span class="ts-badge is-negative">${pos}</span></p>
           `;
         }
 
@@ -211,6 +211,7 @@ $(document).ready(function () {
         }
 
         html += `<h3>- 動詞變化 Conjugations<h3>`;
+        html += `<p>資料有誤僅供參考</p>`;
         html += `
           <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
             <table class="ts-table is-celled table-hover">
@@ -282,25 +283,25 @@ $(document).ready(function () {
               </tr>
               <tr>
                 <td>一般體 nrm.</td>
-                <td>  caay mi-${stem}</td>
-                <td>  caay ma-${stem}</td>
+                <td>  caay pi-${stem}</td> 
+                <td>  caay ka-${stem}</td>
                 <td>     caay ${stem}-en</td>
                 <td>caay sapi-${stem}</td>
                 <td>  caay pi-${stem}en</td>
               </tr>
               <tr>
                 <td>將行體 ipf.</td>
-                <td>        caay mami-${stem}</td>
-                <td>        caay mama-${stem}</td>
+                <td>      caay pa-pi-${stem}</td>
+                <td>      caay ka-ka-${stem}</td>
                 <td>      caay ${fC}a-${stem}-en</td>
                 <td>...</td>
                 <td>...</td>
               </tr>
               <tr>
                 <td>已行體 prf.</td>
-                <td>caay mi-${stem}-ay</td>
-                <td>caay ma-${stem}-ay</td>
-                <td>caay mi-${stem}-an</td>
+                <td>caay pi-${stem}-ay</td>
+                <td>caay ka-${stem}-ay</td>
+                <td>caay pi-${stem}-an</td>
                 <td>...</td>
                 <td>...</td>
               </tr>
@@ -321,6 +322,7 @@ $(document).ready(function () {
         }
 
         html += `<h3>- 動詞變化 Conjugations<h3>`;
+        html += `<p>資料有誤僅供參考</p>`;
         html += `
           <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
             <table class="ts-table is-celled table-hover">
@@ -392,24 +394,24 @@ $(document).ready(function () {
               </tr>
               <tr>
                 <td>一般體nrm.</td>
-                <td>  caay ma-${stem}</td>
+                <td>  caay ka-${stem}</td>
                 <td>...</td>
-                <td>  caay ma-${stem}-en</td>
+                <td>  caay ka-${stem}-en</td>
                 <td>caay saka-${stem}</td>
                 <td>  caay ka-${stem}-an</td>
               </tr>
               <tr>
                 <td>將行體 ipf.</td>
-                <td>caay ma-mi-${stem}</td>
-                <td>caay ma-ma-${stem}</td>
-                <td>caay ma-ma-${stem}-en</td>
+                <td>caay ka-pi-${stem}</td>
+                <td>caay ka-ka-${stem}</td>
+                <td>caay ka-ka-${stem}-en</td>
                 <td>...</td>
                 <td>...</td>
               </tr>
               <tr>
                 <td>已行體 prf.</td>
-                <td>caay ma-${stem}-ay</td>
-                <td>caay ma-${stem}-ay</td>
+                <td>caay ka-${stem}-ay</td>
+                <td>caay ka-${stem}-ay</td>
                 <td>   caay ${stem}-an</td>
                 <td>...</td>
                 <td>...</td>
@@ -431,6 +433,7 @@ $(document).ready(function () {
         }
 
         html += `<h3>- 動詞變化 Conjugations<h3>`;
+        html += `<p>資料有誤僅供參考</p>`;
         html += `
           <div class="ts-box" style="font-size: 14px; overflow-x: scroll">
             <table class="ts-table is-celled table-hover">
@@ -540,6 +543,9 @@ $(document).ready(function () {
             <a href="${amismoedict}">阿美語萌典 蔡中涵大詞典 - ${title}</a>
           </li>
           <li>
+            吳明義 Namoh Rata (2019) O Citing no Amis 
+          </li>
+          <li>
             朱清義 Kolas Foting (2020) O Lalelo^ no Sowal no Pangcah 新觀念阿美語語法
           </li>
           <li>
@@ -547,6 +553,9 @@ $(document).ready(function () {
           </li>
           <li>
             朱珍靜 Dakoc Lamelo (2022) 阿美語中的台灣閩南語及日語借詞
+          </li>
+          <li>
+            高清玄 Norman (2022) O Pitodongan to Caciyaw no 'Amis 阿美族語簡易文法
           </li>
         </ul>
       `; 
