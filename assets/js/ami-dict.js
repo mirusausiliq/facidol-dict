@@ -158,7 +158,7 @@ $(document).ready(function () {
           `;
         } else {
           html += `
-            <p>詞根 Stem: ${title} (unclassified)</p>
+            <p>詞根 Root: ${title} (unclassified)</p>
           `; 
         }
 
@@ -613,14 +613,14 @@ $(document).ready(function () {
     $("#search-input").on("input", function () {
       const inputText = $(this).val().trim().toLowerCase();
       const matchingWords = jsonData.filter((entry) =>
-        entry.title.startsWith(inputText)
+        entry.title.startsWith(inputText) | entry.heteronyms[0].definitions[0].def.startsWith(inputText)
       );
 
       if (inputText === "") {
         $("#autocomplete-list").html("");
       } else {
         const autocompleteItems = matchingWords
-          .map((entry) => `<li class="list-group-item">${entry.title}</li>`)
+          .map((entry) => `<li class="list-group-item">${entry.title} | ${entry.heteronyms[0].definitions[0].def} </li>`)
           .join("");
         $("#autocomplete-list").html(autocompleteItems);
       }
